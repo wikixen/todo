@@ -52,7 +52,7 @@ function TodoList({ todos, setTodos }: { todos: Todo[]; setTodos: Dispatch<SetSt
     <>
       <h3>Your Todos</h3>
       <ul>
-        {todos.map((todo, i) => (
+        {todos.map((todo) => (
           <TodoRow todo={todo} todos={todos} setTodos={setTodos}/>
         ))}
       </ul>
@@ -82,24 +82,13 @@ function TodoRow({ todo, todos, setTodos }: { todo: Todo, todos: Todo[]; setTodo
     );
   }
 
-  if (!todo.completed) {
-    return (
-      <li key={todo.id}>
-        <input type="checkbox" onClick={handleCompleteClick} />
-        {todo.name}
-        <input type="button" value="Delete" onClick={handleDeleteClick} />
-      </li>
-    );
-  } else {
-    return (
-      <li key={todo.id}>
-        <input type="checkbox" onClick={handleCompleteClick} />
-        <s>{todo.name}</s>
-        <input type="button" value="Delete" onClick={handleDeleteClick} />
-      </li>
-    );
-  }
-
+  return (
+    <li key={todo.id}>
+      <input type="checkbox" onClick={handleCompleteClick} />
+      {todo.completed ? <s>todo.name</s> : todo.name}
+      <input type="button" value="Delete" onClick={handleDeleteClick} />
+    </li>
+  );
 }
 
 export default function App() {
